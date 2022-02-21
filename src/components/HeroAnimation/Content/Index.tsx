@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { IContent } from "../Hero.types";
+import { IContent } from "../../Types/Hero.types";
 import { HeroContext } from "../Hero";
 
 const Content = (props: IContent) => {

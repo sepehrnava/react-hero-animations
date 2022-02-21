@@ -14,29 +14,31 @@ const Item = (props: IItem) => {
   } = useContext(HeroContext);
   const { children, background } = props;
 
-  const itemRef = useRef<HTMLDivElement>(document.createElement("div"));
+  const itemRef = useRef<HTMLDivElement>(null);
 
-  const itemExpandedRef = useRef<HTMLDivElement>(document.createElement("div"));
+  const itemExpandedRef = useRef<HTMLDivElement>(null);
 
   const resizeItem = () => {
-    if (itemRef) {
+    if (itemRef.current && itemExpandedRef.current) {
       const rect = itemRef.current.getBoundingClientRect();
-      const { width, left, right, top } = rect;
+      const { width } = rect;
 
-      const bodyRect = document.body.getBoundingClientRect();
+      const bodyRect = document?.body.getBoundingClientRect();
       const itemRect = itemRef.current.getBoundingClientRect();
       const offsetTop = itemRect.top - bodyRect.top;
       const offsetLeft = itemRect.left - bodyRect.left;
 
       if (open) {
         itemExpandedRef.current.style.transition = `all ${transitionDuration}s`;
-        itemExpandedRef.current.style.top = window.scrollY + "px";
+        itemExpandedRef.current.style.top = window?.scrollY + "px";
         itemExpandedRef.current.style.left = "0px";
         itemExpandedRef.current.style.width = "100%";
         setTimeout(() => {
-          itemExpandedRef.current.style.transition = "none";
-          itemExpandedRef.current.style.position = "fixed";
-          itemExpandedRef.current.style.top = "0px";
+          if (itemExpandedRef.current) {
+            itemExpandedRef.current.style.transition = "none";
+            itemExpandedRef.current.style.position = "fixed";
+            itemExpandedRef.current.style.top = "0px";
+          }
         }, transitionDuration * 1000);
       } else {
         itemExpandedRef.current.style.top = offsetTop + "px";
@@ -44,11 +46,6 @@ const Item = (props: IItem) => {
         itemExpandedRef.current.style.width = width + "px";
         itemExpandedRef.current.style.position = "absolute";
       }
-      // const node = document.createElement("div");
-      // node.style = itemRef.current.style;
-      // let clone = itemRef.current.cloneNode(true);
-      // clone.id = "hero-item-new";
-      // document.body.appendChild(clone);
     }
   };
 
