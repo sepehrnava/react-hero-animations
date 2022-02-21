@@ -1,4 +1,3 @@
-import "../../styles.css";
 import React, { useState } from "react";
 import Item from "./Item/Index";
 import Content from "./Content/Index";

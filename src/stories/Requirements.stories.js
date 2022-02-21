@@ -13,7 +13,7 @@ stories.add("Hero", () => {
         <div style={{ width: 400, height: 500, backgroundColor: "#666" }} />
         <div style={{ width: 400, height: 500 }}>
           <Hero
-            transitionDuration={1}
+            transitionDuration={0.5}
             open={open}
             setOpen={() => setOpen(!open)}
           >
@@ -39,6 +39,9 @@ stories.add("Hero", () => {
         </Hero.Content> */}
           </Hero>
         </div>
+        <div style={{ width: 400, height: 500 }} />
+        <div style={{ width: 400, height: 500 }} />
+        <div style={{ width: 400, height: 500 }} />
       </div>
     </>
   );
