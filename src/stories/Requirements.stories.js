@@ -1,0 +1,45 @@
+import React, { useState } from "react";
+import { storiesOf } from "@storybook/react";
+import { Hero } from "../components/HeroAnimation/Hero";
+
+const stories = storiesOf("App Test", module);
+
+stories.add("Hero", () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <div style={{ width: "100%", height: "100%", padding: 50 }}>
+        <div style={{ width: 400, height: 500, backgroundColor: "#666" }} />
+        <div style={{ width: 400, height: 500 }}>
+          <Hero
+            transitionDuration={1}
+            open={open}
+            setOpen={() => setOpen(!open)}
+          >
+            <Hero.Item background='#aaa'>
+              <div
+                style={{
+                  // backgroundColor: "#555",
+                  width: 400,
+                  height: 200,
+                  // color: "white",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                hero
+              </div>
+            </Hero.Item>
+            {/* <Hero.Content>
+          <div style={{ backgroundColor: "#aaa", width: 400, height: 200 }}>
+            contentttt
+          </div>
+        </Hero.Content> */}
+          </Hero>
+        </div>
+      </div>
+    </>
+  );
+});
