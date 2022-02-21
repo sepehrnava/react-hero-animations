@@ -7,7 +7,13 @@ import { IHero } from "../Types/Hero.types";
 export const HeroContext = React.createContext<IHero>({});
 
 export const Hero = (props: IHero) => {
-  const { children, open, setOpen, transitionDuration } = props;
+  const {
+    children,
+    open,
+    setOpen,
+    transitionDuration,
+    relatedToParent,
+  } = props;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,6 +34,7 @@ export const Hero = (props: IHero) => {
     setOpen,
     userControlMod,
     transitionDuration,
+    relatedToParent,
   };
 
   return (

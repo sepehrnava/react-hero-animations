@@ -10,6 +10,7 @@ export interface IHero {
   isOpenFunc?: IIsOpenFunc;
   children?: any;
   transitionDuration?: number;
+  relatedToParent?: boolean;
 }
 
 export interface IItem {

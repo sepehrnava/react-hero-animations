@@ -11,6 +11,7 @@ const Item = (props: IItem) => {
     setOpen,
     userControlMod,
     transitionDuration = 0.5,
+    relatedToParent = false,
   } = useContext(HeroContext);
 
   let currentOpen = isOpen,
@@ -33,10 +34,32 @@ const Item = (props: IItem) => {
       const rect = itemRef.current.getBoundingClientRect();
       const { width } = rect;
 
-      const bodyRect = document?.body.getBoundingClientRect();
       const itemRect = itemRef.current.getBoundingClientRect();
-      const offsetTop = itemRect.top - bodyRect.top;
-      const offsetLeft = itemRect.left - bodyRect.left;
+
+      let itemLeft = itemRect.left,
+        itemTop = itemRect.top,
+        itemPositionBefore = "absolute",
+        itemPositionAfter = "fixed",
+        itemTopAfter = "0px",
+        itemLeftAfter = "0px",
+        widthBefore = width,
+        widthAfter = "100%";
+      const bodyRect = document?.body.getBoundingClientRect();
+
+      const parentEL = itemRef.current.parentElement;
+
+      const parentRect = parentEL?.getBoundingClientRect();
+
+      let offsetTop = itemRect.top - bodyRect.top;
+      let offsetLeft = itemRect.left - bodyRect.left;
+
+      if (relatedToParent && parentRect) {
+        itemTop -= parentRect.top;
+        itemLeft -= parentRect.left;
+        itemTopAfter = parentRect.top + "px";
+        itemLeftAfter = parentRect.left + "px";
+        widthAfter = parentRect.width + "px";
+      }
 
       if (currentOpen) {
         itemExpandedRef.current.style.visibility = `visible`;
@@ -44,25 +67,25 @@ const Item = (props: IItem) => {
           if (itemRef.current) itemRef.current.style.visibility = `hidden`;
         }, 10);
         itemExpandedRef.current.style.transition = `all ${transitionDuration}s`;
-        itemExpandedRef.current.style.transform = `translate(${-itemRect.left}px, ${-itemRect.top}px)`;
-        itemExpandedRef.current.style.width = "100%";
+        itemExpandedRef.current.style.transform = `translate(${-itemLeft}px, ${-itemTop}px)`;
+        itemExpandedRef.current.style.width = widthAfter;
 
         setTimeout(() => {
           if (itemExpandedRef.current) {
-            itemExpandedRef.current.style.position = "fixed";
+            itemExpandedRef.current.style.position = itemPositionAfter;
             itemExpandedRef.current.style.transition = "none";
-            itemExpandedRef.current.style.top = "0px";
-            itemExpandedRef.current.style.left = "0px";
+            itemExpandedRef.current.style.top = itemTopAfter;
+            itemExpandedRef.current.style.left = itemLeftAfter;
             itemExpandedRef.current.style.transform = "none";
           }
         }, transitionDuration * 1000);
       } else {
         itemExpandedRef.current.style.transition = `all ${transitionDuration}s`;
-        itemExpandedRef.current.style.transform = `translate(${itemRect.left}px, ${itemRect.top}px)`;
-        itemExpandedRef.current.style.width = width + "px";
+        itemExpandedRef.current.style.transform = `translate(${itemLeft}px, ${itemTop}px)`;
+        itemExpandedRef.current.style.width = widthBefore + "px";
         setTimeout(() => {
           if (itemExpandedRef.current && itemRef.current) {
-            itemExpandedRef.current.style.position = "absolute";
+            itemExpandedRef.current.style.position = itemPositionBefore;
             itemExpandedRef.current.style.transition = "none";
             itemExpandedRef.current.style.top = offsetTop + "px";
             itemExpandedRef.current.style.left = offsetLeft + "px";
