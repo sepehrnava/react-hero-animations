@@ -50,6 +50,7 @@ const Item = (props: IItem) => {
         ref={itemExpandedRef}
         onClick={toggleOpen}
         style={{ ...styles.heroItemExpanded, background }}
+        id='react-animations-hero-item-expanded'
       >
         {children}
       </div>
@@ -64,6 +65,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     cursor: "pointer",
+    zIndex: 1,
   },
   heroItemExpanded: {
     position: "absolute" as "absolute",
@@ -72,6 +74,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     cursor: "pointer",
+    zIndex: 1,
   },
 };
 

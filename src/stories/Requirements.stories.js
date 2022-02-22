@@ -13,7 +13,7 @@ stories.add("Hero", () => {
         width: 700,
         height: 700,
         border: "1px solid black",
-        overflow: "hidden",
+        // overflow: "hidden",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -41,7 +41,7 @@ stories.add("Hero", () => {
           </div>
         </Hero.Item>
         <Hero.Content>
-          <div style={{ backgroundColor: "#aaa", width: 400, height: 200 }}>
+          <div style={{ backgroundColor: "#ccc", width: 1400, height: 1200 }}>
             contentttt
           </div>
         </Hero.Content>

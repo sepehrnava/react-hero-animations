@@ -27,3 +27,8 @@ export interface IResizeItem {
   open: boolean;
   transitionDuration: number;
 }
+
+export interface IStyleContent {
+  contentRef: RefObject<HTMLDivElement>;
+  related: boolean;
+}

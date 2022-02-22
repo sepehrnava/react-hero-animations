@@ -38,6 +38,7 @@ const ResizeItem = (props: IResizeItem) => {
       itemExpandedRef.current.style.left = offsetLeft + "px";
       itemExpandedRef.current.style.width = widthBefore + "px";
       itemExpandedRef.current.style.visibility = `visible`;
+      itemExpandedRef.current.style.pointerEvents = `none`;
       setTimeout(() => {
         if (itemRef.current) itemRef.current.style.visibility = `hidden`;
       }, 10);
@@ -52,12 +53,14 @@ const ResizeItem = (props: IResizeItem) => {
           itemExpandedRef.current.style.top = itemTopAfter;
           itemExpandedRef.current.style.left = itemLeftAfter;
           itemExpandedRef.current.style.transform = "none";
+          itemExpandedRef.current.style.pointerEvents = `auto`;
         }
       }, transitionDuration * 1000);
     } else {
       itemExpandedRef.current.style.transition = `all ${transitionDuration}s`;
       itemExpandedRef.current.style.transform = `translate(${itemLeft}px, ${itemTop}px)`;
       itemExpandedRef.current.style.width = widthBefore + "px";
+      itemExpandedRef.current.style.pointerEvents = `none`;
       setTimeout(() => {
         if (itemExpandedRef.current && itemRef.current) {
           itemExpandedRef.current.style.position = itemPositionBefore;
@@ -67,6 +70,7 @@ const ResizeItem = (props: IResizeItem) => {
           itemExpandedRef.current.style.transform = "none";
           itemRef.current.style.visibility = `visible`;
           itemExpandedRef.current.style.visibility = `hidden`;
+          itemExpandedRef.current.style.pointerEvents = `auto`;
         }
       }, transitionDuration * 1000);
     }
