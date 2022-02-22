@@ -14,8 +14,6 @@ const ResizeItem = (props: IResizeItem) => {
 
     let itemLeft = itemRect.left,
       itemTop = itemRect.top,
-      itemPositionBefore = "absolute",
-      itemPositionAfter = "fixed",
       itemTopAfter = "0px",
       itemLeftAfter = "0px",
       widthBefore = width,
@@ -33,7 +31,6 @@ const ResizeItem = (props: IResizeItem) => {
     }
 
     if (open) {
-      itemExpandedRef.current.style.position = itemPositionBefore;
       itemExpandedRef.current.style.top = offsetTop + "px";
       itemExpandedRef.current.style.left = offsetLeft + "px";
       itemExpandedRef.current.style.width = widthBefore + "px";
@@ -48,7 +45,6 @@ const ResizeItem = (props: IResizeItem) => {
 
       setTimeout(() => {
         if (itemExpandedRef.current) {
-          itemExpandedRef.current.style.position = itemPositionAfter;
           itemExpandedRef.current.style.transition = "none";
           itemExpandedRef.current.style.top = itemTopAfter;
           itemExpandedRef.current.style.left = itemLeftAfter;
@@ -63,7 +59,6 @@ const ResizeItem = (props: IResizeItem) => {
       itemExpandedRef.current.style.pointerEvents = `none`;
       setTimeout(() => {
         if (itemExpandedRef.current && itemRef.current) {
-          itemExpandedRef.current.style.position = itemPositionBefore;
           itemExpandedRef.current.style.transition = "none";
           itemExpandedRef.current.style.top = offsetTop + "px";
           itemExpandedRef.current.style.left = offsetLeft + "px";
