@@ -7,34 +7,25 @@ import { IHero } from "../Types/Hero.types";
 export const HeroContext = React.createContext<IHero>({});
 
 export const Hero = (props: IHero) => {
-  const {
-    children,
-    open,
-    setOpen,
-    transitionDuration,
-    relatedToParent,
-  } = props;
+  const { children, transitionDuration, related } = props;
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [nativeOpen, nativeSetOpen] = useState(false);
 
-  function isOpenFunc(value: boolean) {
-    setIsOpen(value);
-  }
+  const userOpen = props.open;
+  const userSetOpen = props.setOpen;
 
-  let userControlMod: boolean = false;
+  let controlled: boolean = false;
 
-  if (typeof open !== "undefined") {
-    userControlMod = true;
+  if (typeof userOpen !== "undefined") {
+    controlled = true;
   }
 
   let contextValue: IHero = {
-    isOpen,
-    isOpenFunc,
-    open,
-    setOpen,
-    userControlMod,
+    open: controlled ? userOpen : nativeOpen,
+    setOpen: controlled ? userSetOpen : nativeSetOpen,
+    controlled,
     transitionDuration,
-    relatedToParent,
+    related,
   };
 
   return (

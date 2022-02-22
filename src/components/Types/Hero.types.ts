@@ -1,16 +1,14 @@
-export interface IIsOpenFunc {
+import { RefObject } from "react";
+export interface ISetOpen {
   (value: boolean): void;
 }
-
 export interface IHero {
-  open?: boolean | undefined;
-  setOpen?: IIsOpenFunc;
-  userControlMod?: boolean | undefined;
-  isOpen?: boolean | undefined;
-  isOpenFunc?: IIsOpenFunc;
+  open?: boolean;
+  setOpen?: ISetOpen;
+  controlled?: boolean;
   children?: any;
   transitionDuration?: number;
-  relatedToParent?: boolean;
+  related?: boolean;
 }
 
 export interface IItem {
@@ -20,4 +18,12 @@ export interface IItem {
 
 export interface IContent {
   children?: any;
+}
+
+export interface IResizeItem {
+  itemRef: RefObject<HTMLDivElement>;
+  itemExpandedRef: RefObject<HTMLDivElement>;
+  related: boolean;
+  open: boolean;
+  transitionDuration: number;
 }

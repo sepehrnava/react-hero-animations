@@ -23,7 +23,7 @@ stories.add("Hero", () => {
         transitionDuration={0.5}
         open={open}
         setOpen={() => setOpen(!open)}
-        relatedToParent
+        related
       >
         <Hero.Item background='#aaa'>
           <div
@@ -40,11 +40,11 @@ stories.add("Hero", () => {
             hero
           </div>
         </Hero.Item>
-        {/* <Hero.Content>
+        <Hero.Content>
           <div style={{ backgroundColor: "#aaa", width: 400, height: 200 }}>
             contentttt
           </div>
-        </Hero.Content> */}
+        </Hero.Content>
       </Hero>
       {/* <div>
         <div style={{ width: "100%", height: "100%", padding: 50 }}>
