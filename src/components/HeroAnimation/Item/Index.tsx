@@ -15,6 +15,9 @@ const Item = (props: IItem) => {
 
   const itemRef = useRef<HTMLDivElement>(null);
   const itemExpandedRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  const [inititalOpen, setInititalOpen] = useState(false);
 
   useEffect(() => {
     if (itemRef.current && itemExpandedRef.current) {
@@ -27,24 +30,57 @@ const Item = (props: IItem) => {
     ResizeItem({
       itemRef,
       itemExpandedRef,
+      overlayRef,
       related,
       open,
       transitionDuration,
+      inititalOpen,
     });
+    setInititalOpen(true);
   }, [open]);
 
   const toggleOpen = () => {
     setOpen && setOpen(!open);
   };
 
+  // console.log(Object.keys(children[1]._owner));
+
+  // console.log(children[1].type.displayName);
+
+  let renderContent = null;
+
+  if (children.length > 0) {
+    children.forEach((element: any) => {
+      if (element.type?.displayName === "Hero.Content") {
+        renderContent = element;
+      }
+    });
+  } else {
+    if (children?.type?.displayName === "Hero.Content")
+      renderContent = children;
+  }
+
+  let renderExceptContent = [];
+
+  if (children.length > 0) {
+    children.forEach((element: any) => {
+      if (element.type?.displayName !== "Hero.Content") {
+        renderExceptContent.push(element);
+      }
+    });
+  } else {
+    if (children?.type?.displayName !== "Hero.Content")
+      renderExceptContent = children;
+  }
+
   return (
-    <>
+    <div style={styles.heroContainer}>
       <div
         ref={itemRef}
         onClick={toggleOpen}
         style={{ ...styles.heroItem, background }}
       >
-        {children}
+        {renderExceptContent}
       </div>
       <div
         ref={itemExpandedRef}
@@ -52,30 +88,44 @@ const Item = (props: IItem) => {
         style={{ ...styles.heroItemExpanded, background }}
         id='react-animations-hero-item-expanded'
       >
-        {children}
+        {renderExceptContent}
       </div>
-    </>
+      <div style={styles.overlay} ref={overlayRef}>
+        <div
+          onClick={toggleOpen}
+          style={{ ...styles.heroItemOverlay, background }}
+        >
+          {renderExceptContent}
+        </div>
+
+        {renderContent}
+      </div>
+    </div>
   );
 };
 
 const styles = {
+  heroContainer: {
+    overflow: "auto",
+  },
   heroItem: {
     width: "max-content",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
     cursor: "pointer",
-    zIndex: 1,
+    display: "flex",
   },
   heroItemExpanded: {
     position: "absolute" as "absolute",
     visibility: "hidden" as "hidden",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
     cursor: "pointer",
-    zIndex: 1,
+    display: "flex",
   },
+  overlay: {
+    // backgroundColor: "aqua",
+    display: "none",
+    position: "absolute" as "absolute",
+    overflow: "auto",
+  },
+  heroItemOverlay: {},
 };
 
 export default Item;

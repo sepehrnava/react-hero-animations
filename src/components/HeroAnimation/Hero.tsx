@@ -7,7 +7,7 @@ import { IHero } from "../Types/Hero.types";
 export const HeroContext = React.createContext<IHero>({});
 
 export const Hero = (props: IHero) => {
-  const { children, transitionDuration, related } = props;
+  const { children, transitionDuration, related, style } = props;
 
   const [nativeOpen, nativeSetOpen] = useState(false);
 
@@ -28,8 +28,22 @@ export const Hero = (props: IHero) => {
     related,
   };
 
+  let renderItem = null;
+
+  if (children.length > 0) {
+    children.forEach((element: any) => {
+      if (element.type?.displayName === "Hero.Item") {
+        renderItem = element;
+      }
+    });
+  } else {
+    if (children?.type?.displayName === "Hero.Item") renderItem = children;
+  }
+
   return (
-    <HeroContext.Provider value={contextValue}>{children}</HeroContext.Provider>
+    <HeroContext.Provider value={contextValue}>
+      <div style={style}>{renderItem}</div>
+    </HeroContext.Provider>
   );
 };
 

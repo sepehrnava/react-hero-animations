@@ -9,6 +9,7 @@ export interface IHero {
   children?: any;
   transitionDuration?: number;
   related?: boolean;
+  style?: Object;
 }
 
 export interface IItem {
@@ -23,9 +24,11 @@ export interface IContent {
 export interface IResizeItem {
   itemRef: RefObject<HTMLDivElement>;
   itemExpandedRef: RefObject<HTMLDivElement>;
+  overlayRef: RefObject<HTMLDivElement>;
   related: boolean;
   open: boolean;
   transitionDuration: number;
+  inititalOpen: boolean;
 }
 
 export interface IStyleContent {
