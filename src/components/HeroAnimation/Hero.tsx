@@ -4,6 +4,8 @@ import Content from "./Content/Index";
 
 import { IHero } from "../Types/Hero.types";
 
+import "./Styles/heroStyles.css";
+
 export const HeroContext = React.createContext<IHero>({});
 
 export const Hero = (props: IHero) => {

@@ -62,10 +62,11 @@ const ResizeItem = (props: IResizeItem) => {
         heightAfter = targetHeight;
       }
     }
-    if (overlayItemExpandedRef.current)
+    if (overlayItemExpandedRef.current) {
       overlayItemExpandedRef.current.style.height = heightAfter + "px";
+    }
 
-    const afterTransition = () => {
+    const transitionTarget = () => {
       if (open) {
         if (itemExpandedRef.current && overlayRef.current) {
           itemExpandedRef.current.style.transition = "none";
@@ -118,10 +119,10 @@ const ResizeItem = (props: IResizeItem) => {
       itemExpandedRef.current.style.height = heightAfter + "px";
 
       if (inititalOpen) {
-        afterTransition();
+        transitionTarget();
       } else {
         setTimeout(() => {
-          afterTransition();
+          transitionTarget();
         }, transitionDuration * 1000);
       }
     } else {
@@ -136,10 +137,10 @@ const ResizeItem = (props: IResizeItem) => {
       }, 10);
 
       if (inititalOpen) {
-        afterTransition();
+        transitionTarget();
       } else {
         setTimeout(() => {
-          afterTransition();
+          transitionTarget();
         }, transitionDuration * 1000);
       }
     }

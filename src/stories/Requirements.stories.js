@@ -24,7 +24,7 @@ stories.add("Hero", () => {
           transitionDuration={0.5}
           open={open}
           setOpen={() => setOpen(!open)}
-          related
+          // related
           style={{ marginTop: 200 }}
           // wrapperRef={ref}
           // targetHeight="same"
@@ -40,6 +40,8 @@ stories.add("Hero", () => {
                 width: "100%",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
+                marginLeft: 100,
+                // borderRadius: 10,
               }}
             >
               <div>ccc</div>
@@ -58,7 +60,7 @@ stories.add("Hero", () => {
             </div>
             <HeroContent>
               <div
-                style={{ backgroundColor: "#ccc", width: "100%", height: 1200 }}
+                style={{ backgroundColor: "#ccc", width: "100%", height: 400 }}
               >
                 contentttt
                 <br />

@@ -99,10 +99,15 @@ const Item = (props: IItem) => {
       >
         {renderExceptContent}
       </div>
-      <div style={styles.overlay} ref={overlayRef}>
+      <div
+        //@ts-ignore
+        style={styles.overlay}
+        ref={overlayRef}
+        className='react-hero-overlay'
+      >
         <div
           onClick={toggleOpen}
-          style={{ ...styles.heroItemOverlay, background }}
+          style={{ background }}
           ref={overlayItemExpandedRef}
         >
           {renderExceptContent}
@@ -133,9 +138,8 @@ const styles = {
   overlay: {
     visibility: "hidden" as "hidden",
     position: "absolute" as "absolute",
-    overflow: "auto",
+    overflowY: "overlay" as "overlay",
   },
-  heroItemOverlay: {},
 };
 
 export default Item;
