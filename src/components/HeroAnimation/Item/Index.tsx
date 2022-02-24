@@ -17,7 +17,7 @@ const Item = (props: IItem) => {
   const itemExpandedRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  const [inititalOpen, setInititalOpen] = useState(false);
+  const [inititalOpen, setInititalOpen] = useState(true);
 
   useEffect(() => {
     if (itemRef.current && itemExpandedRef.current) {
@@ -36,7 +36,7 @@ const Item = (props: IItem) => {
       transitionDuration,
       inititalOpen,
     });
-    setInititalOpen(true);
+    setInititalOpen(false);
   }, [open]);
 
   const toggleOpen = () => {
