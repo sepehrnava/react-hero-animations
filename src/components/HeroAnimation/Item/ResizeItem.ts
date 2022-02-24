@@ -51,8 +51,9 @@ const ResizeItem = (props: IResizeItem) => {
       overlayWidth = wrapperRect.width + "px";
       overlayHeight = wrapperRect.height + "px";
       itemPosition = "absolute";
-
-      heightAfter = wrapperRect.height;
+      if (hasWrapper) {
+        heightAfter = wrapperRect.height;
+      }
     }
     if (targetHeight && targetHeight !== "same") {
       if (targetHeight === "full") {

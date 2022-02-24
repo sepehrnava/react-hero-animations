@@ -24,12 +24,12 @@ stories.add("Hero", () => {
           transitionDuration={0.5}
           open={open}
           setOpen={() => setOpen(!open)}
-          // related
+          related
           style={{ marginTop: 200 }}
           // wrapperRef={ref}
           // targetHeight="same"
           // targetHeight="full"
-          targetHeight={100}
+          // targetHeight={100}
         >
           <HeroItem>
             <div
