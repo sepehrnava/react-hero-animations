@@ -11,6 +11,7 @@ export interface IHero {
   related?: boolean;
   style?: Object;
   wrapperRef?: RefObject<HTMLElement>;
+  targetHeight?: number | "full" | "same";
 }
 
 export interface IItem {
@@ -26,11 +27,14 @@ export interface IResizeItem {
   itemRef: RefObject<HTMLDivElement>;
   itemExpandedRef: RefObject<HTMLDivElement>;
   overlayRef: RefObject<HTMLDivElement>;
+  overlayItemExpandedRef: RefObject<HTMLDivElement>;
   related: boolean;
   open: boolean;
   transitionDuration: number;
   inititalOpen: boolean;
   wrapperEl: HTMLElement | null | undefined;
+  targetHeight?: number | "full" | "same";
+  hasWrapper: boolean;
 }
 
 export interface IStyleContent {

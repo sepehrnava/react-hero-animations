@@ -24,15 +24,18 @@ stories.add("Hero", () => {
           transitionDuration={0.5}
           open={open}
           setOpen={() => setOpen(!open)}
-          related
+          // related
           style={{ marginTop: 200 }}
-          wrapperRef={ref}
+          // wrapperRef={ref}
+          // targetHeight="same"
+          // targetHeight="full"
+          targetHeight={100}
         >
           <HeroItem>
             <div
               style={{
                 backgroundImage:
-                  "url('https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/lr/s88-ted-2231-eve-01_1.jpg?w=600&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=5fb4d428538681c02df139d65d27f9b6')",
+                  "url('https://media.springernature.com/full/springer-cms/rest/v1/img/18893370/v1/height/320')",
                 height: "100%",
                 width: "100%",
                 backgroundSize: "cover",

@@ -13,11 +13,13 @@ const Item = (props: IItem) => {
     transitionDuration = 0.5,
     related = false,
     wrapperRef,
+    targetHeight = "same",
   } = useContext(HeroContext);
 
   const itemRef = useRef<HTMLDivElement>(null);
   const itemExpandedRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const overlayItemExpandedRef = useRef<HTMLDivElement>(null);
 
   const [inititalOpen, setInititalOpen] = useState(true);
 
@@ -29,20 +31,26 @@ const Item = (props: IItem) => {
   }, []);
 
   useEffect(() => {
-    let wrapperEl =
-      itemRef.current?.parentElement?.parentElement?.parentElement;
+    let hasWrapper = false,
+      wrapperEl = itemRef.current?.parentElement?.parentElement?.parentElement;
 
-    if (wrapperRef) wrapperEl = wrapperRef.current;
+    if (wrapperRef) {
+      wrapperEl = wrapperRef.current;
+      hasWrapper = true;
+    }
 
     ResizeItem({
       itemRef,
       itemExpandedRef,
       overlayRef,
+      overlayItemExpandedRef,
       related,
       open,
       transitionDuration,
       wrapperEl,
+      hasWrapper,
       inititalOpen,
+      targetHeight,
     });
     setInititalOpen(false);
   }, [open]);
@@ -88,7 +96,6 @@ const Item = (props: IItem) => {
         ref={itemExpandedRef}
         onClick={toggleOpen}
         style={{ ...styles.heroItemExpanded, background }}
-        id='react-animations-hero-item-expanded'
       >
         {renderExceptContent}
       </div>
@@ -96,6 +103,7 @@ const Item = (props: IItem) => {
         <div
           onClick={toggleOpen}
           style={{ ...styles.heroItemOverlay, background }}
+          ref={overlayItemExpandedRef}
         >
           {renderExceptContent}
         </div>
@@ -123,7 +131,6 @@ const styles = {
     overflow: "hidden",
   },
   overlay: {
-    // backgroundColor: "aqua",
     visibility: "hidden" as "hidden",
     position: "absolute" as "absolute",
     overflow: "auto",

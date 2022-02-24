@@ -7,7 +7,14 @@ import { IHero } from "../Types/Hero.types";
 export const HeroContext = React.createContext<IHero>({});
 
 export const Hero = (props: IHero) => {
-  const { children, transitionDuration, related, style, wrapperRef } = props;
+  const {
+    children,
+    transitionDuration,
+    related,
+    style,
+    wrapperRef,
+    targetHeight,
+  } = props;
 
   const [nativeOpen, nativeSetOpen] = useState(false);
 
@@ -27,6 +34,7 @@ export const Hero = (props: IHero) => {
     transitionDuration,
     related,
     wrapperRef,
+    targetHeight,
   };
 
   let renderItem = null;

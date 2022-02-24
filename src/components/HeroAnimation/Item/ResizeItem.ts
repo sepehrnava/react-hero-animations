@@ -5,11 +5,14 @@ const ResizeItem = (props: IResizeItem) => {
     itemRef,
     itemExpandedRef,
     overlayRef,
+    overlayItemExpandedRef,
     related,
     open,
     transitionDuration,
     wrapperEl,
+    hasWrapper,
     inititalOpen,
+    targetHeight,
   } = props;
 
   if (itemRef.current && itemExpandedRef.current && overlayRef.current) {
@@ -26,7 +29,7 @@ const ResizeItem = (props: IResizeItem) => {
       widthBefore = width,
       widthAfter = "100vw",
       heightBefore = height + "px",
-      heightAfter = height + "px",
+      heightAfter = height,
       overlayWidth = "100vw",
       overlayTopAfter = "0px",
       overlayHeight = "100vh",
@@ -37,19 +40,29 @@ const ResizeItem = (props: IResizeItem) => {
     let offsetTop = itemRect.top - bodyRect.top,
       offsetLeft = itemRect.left - bodyRect.left;
 
-    if (related && wrapperRect) {
+    if ((related || hasWrapper) && wrapperRect) {
       itemTop -= wrapperRect.top;
       itemLeft -= wrapperRect.left;
       itemTopAfter = wrapperRect.top - bodyRect.top + "px";
       itemLeftAfter = wrapperRect.left + "px";
       overlayTopAfter = wrapperRect.top - bodyRect.top + "px";
       widthAfter = wrapperRect.width + "px";
-      heightAfter = wrapperRect.height + "px";
       overlayPosition = "absolute";
       overlayWidth = wrapperRect.width + "px";
       overlayHeight = wrapperRect.height + "px";
       itemPosition = "absolute";
+
+      heightAfter = wrapperRect.height;
     }
+    if (targetHeight && targetHeight !== "same") {
+      if (targetHeight === "full") {
+        if (wrapperRect) heightAfter = wrapperRect.height;
+      } else {
+        heightAfter = targetHeight;
+      }
+    }
+    if (overlayItemExpandedRef.current)
+      overlayItemExpandedRef.current.style.height = heightAfter + "px";
 
     const afterTransition = () => {
       if (open) {
@@ -101,7 +114,7 @@ const ResizeItem = (props: IResizeItem) => {
       itemExpandedRef.current.style.transition = transition;
       itemExpandedRef.current.style.transform = `translate(${-itemLeft}px, ${-itemTop}px)`;
       itemExpandedRef.current.style.width = widthAfter;
-      itemExpandedRef.current.style.height = heightAfter;
+      itemExpandedRef.current.style.height = heightAfter + "px";
 
       if (inititalOpen) {
         afterTransition();

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import { IContent } from "../../Types/Hero.types";
 
 const Content = (props: IContent) => {
