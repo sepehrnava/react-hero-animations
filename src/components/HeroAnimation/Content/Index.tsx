@@ -5,7 +5,6 @@ const Content = (props: IContent) => {
   const { children } = props;
 
   const contentRef = useRef<HTMLDivElement>(null);
-  console.log("content rendered");
 
   return <div ref={contentRef}>{children}</div>;
 };

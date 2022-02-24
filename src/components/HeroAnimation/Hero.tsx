@@ -49,3 +49,5 @@ export const Hero = (props: IHero) => {
 
 Hero.Item = Item;
 Hero.Content = Content;
+
+export { Item as HeroItem, Content as HeroContent };

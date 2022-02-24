@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
-import { Hero } from "../components/HeroAnimation/Hero";
+import { Hero, HeroItem, HeroContent } from "../components/HeroAnimation/Hero";
 
 const stories = storiesOf("App Test", module);
 
@@ -26,7 +26,7 @@ stories.add("Hero", () => {
           related
           style={{ marginTop: 200 }}
         >
-          <Hero.Item>
+          <HeroItem>
             <div
               style={{ backgroundColor: "#aaa", height: "100%", width: "100%" }}
             >
@@ -44,7 +44,7 @@ stories.add("Hero", () => {
                 hero
               </div>
             </div>
-            <Hero.Content>
+            <HeroContent>
               <div
                 style={{ backgroundColor: "#ccc", width: "100%", height: 1200 }}
               >
@@ -53,8 +53,8 @@ stories.add("Hero", () => {
                 <button onClick={() => setCounter(counter + 1)}>+</button>{" "}
                 &nbsp; {counter}
               </div>
-            </Hero.Content>
-          </Hero.Item>
+            </HeroContent>
+          </HeroItem>
         </Hero>
       </div>
       <div>
