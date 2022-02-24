@@ -33,12 +33,12 @@ export const Hero = (props: IHero) => {
 
   if (children.length > 0) {
     children.forEach((element: any) => {
-      if (element.type?.displayName === "Hero.Item") {
+      if (element.type === Item) {
         renderItem = element;
       }
     });
   } else {
-    if (children?.type?.displayName === "Hero.Item") renderItem = children;
+    if (children.type === Item) renderItem = children;
   }
 
   return (

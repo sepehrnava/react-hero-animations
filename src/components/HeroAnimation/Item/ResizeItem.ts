@@ -25,6 +25,8 @@ const ResizeItem = (props: IResizeItem) => {
       itemLeftAfter = "0px",
       widthBefore = width,
       widthAfter = "100vw",
+      heightBefore = height + "px",
+      heightAfter = height + "px",
       overlayWidth = "100vw",
       overlayTopAfter = "0px",
       overlayHeight = "100vh",
@@ -42,6 +44,7 @@ const ResizeItem = (props: IResizeItem) => {
       itemLeftAfter = wrapperRect.left + "px";
       overlayTopAfter = wrapperRect.top - bodyRect.top + "px";
       widthAfter = wrapperRect.width + "px";
+      heightAfter = wrapperRect.height + "px";
       overlayPosition = "absolute";
       overlayWidth = wrapperRect.width + "px";
       overlayHeight = wrapperRect.height + "px";
@@ -60,7 +63,7 @@ const ResizeItem = (props: IResizeItem) => {
           itemExpandedRef.current.style.visibility = `hidden`;
           overlayRef.current.style.top = overlayTopAfter;
           overlayRef.current.style.left = itemLeftAfter;
-          overlayRef.current.style.display = "block";
+          overlayRef.current.style.visibility = "visible";
           overlayRef.current.style.width = overlayWidth;
           overlayRef.current.style.height = overlayHeight;
           overlayRef.current.style.position = overlayPosition;
@@ -88,7 +91,7 @@ const ResizeItem = (props: IResizeItem) => {
       itemExpandedRef.current.style.top = offsetTop + "px";
       itemExpandedRef.current.style.left = offsetLeft + "px";
       itemExpandedRef.current.style.width = widthBefore + "px";
-      itemExpandedRef.current.style.height = height + "px";
+      itemExpandedRef.current.style.height = heightBefore;
 
       itemExpandedRef.current.style.visibility = `visible`;
       itemExpandedRef.current.style.pointerEvents = `none`;
@@ -98,6 +101,8 @@ const ResizeItem = (props: IResizeItem) => {
       itemExpandedRef.current.style.transition = transition;
       itemExpandedRef.current.style.transform = `translate(${-itemLeft}px, ${-itemTop}px)`;
       itemExpandedRef.current.style.width = widthAfter;
+      itemExpandedRef.current.style.height = heightAfter;
+
       if (inititalOpen) {
         afterTransition();
       } else {
@@ -110,10 +115,10 @@ const ResizeItem = (props: IResizeItem) => {
       itemExpandedRef.current.style.transition = transition;
       itemExpandedRef.current.style.transform = `translate(${itemLeft}px, ${itemTop}px)`;
       itemExpandedRef.current.style.width = widthBefore + "px";
-      itemExpandedRef.current.style.height = height + "px";
+      itemExpandedRef.current.style.height = heightBefore;
       itemExpandedRef.current.style.pointerEvents = `none`;
       setTimeout(() => {
-        if (overlayRef.current) overlayRef.current.style.display = `none`;
+        if (overlayRef.current) overlayRef.current.style.visibility = "hidden";
       }, 10);
 
       if (inititalOpen) {

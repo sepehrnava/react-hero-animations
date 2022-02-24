@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { IItem } from "../../Types/Hero.types";
 import { HeroContext } from "../Hero";
 import ResizeItem from "./ResizeItem";
+import Content from "../Content/Index";
 
 const Item = (props: IItem) => {
   const { children, background } = props;
@@ -50,34 +51,28 @@ const Item = (props: IItem) => {
     setOpen && setOpen(!open);
   };
 
-  // console.log(Object.keys(children[1]._owner));
-
-  // console.log(children[1].type.displayName);
-
   let renderContent = null;
 
   if (children.length > 0) {
     children.forEach((element: any) => {
-      if (element.type?.displayName === "Hero.Content") {
+      if (element.type === Content) {
         renderContent = element;
       }
     });
   } else {
-    if (children?.type?.displayName === "Hero.Content")
-      renderContent = children;
+    if (children.type === Content) renderContent = children;
   }
 
   let renderExceptContent = [];
 
   if (children.length > 0) {
     children.forEach((element: any) => {
-      if (element.type?.displayName !== "Hero.Content") {
+      if (element.type !== Content) {
         renderExceptContent.push(element);
       }
     });
   } else {
-    if (children?.type?.displayName !== "Hero.Content")
-      renderExceptContent = children;
+    if (children.type !== Content) renderExceptContent = children;
   }
 
   return (
@@ -125,10 +120,11 @@ const styles = {
     visibility: "hidden" as "hidden",
     cursor: "pointer",
     display: "flex",
+    overflow: "hidden",
   },
   overlay: {
     // backgroundColor: "aqua",
-    display: "none",
+    visibility: "hidden" as "hidden",
     position: "absolute" as "absolute",
     overflow: "auto",
   },

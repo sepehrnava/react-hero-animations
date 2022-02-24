@@ -1,6 +1,6 @@
 {
   "name": "react-hero-animations-not-ready",
-  "version": "0.0.8",
+  "version": "0.3.0",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -9,7 +9,8 @@
     "start": "start-storybook -p 6006",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build-lib": "rollup -c && npm publish"
+    "build-lib": "rollup -c",
+    "publish-lib": "rollup -c && npm publish"
   },
   "author": "Sepehr Nava",
   "license": "MIT",
