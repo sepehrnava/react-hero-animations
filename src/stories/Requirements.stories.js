@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import { Hero, HeroItem, HeroContent } from "../components/HeroAnimation/Hero";
 
@@ -8,6 +8,7 @@ stories.add("Hero", () => {
   const [open, setOpen] = useState(false);
   const [counter, setCounter] = useState(0);
 
+  const ref = useRef(null);
   return (
     <>
       <div style={{ marginBottom: 200 }}>bbb</div>
@@ -23,8 +24,9 @@ stories.add("Hero", () => {
           transitionDuration={0.5}
           open={open}
           setOpen={() => setOpen(!open)}
-          related
+          // related
           style={{ marginTop: 200 }}
+          wrapperRef={ref}
         >
           <HeroItem>
             <div
@@ -59,7 +61,10 @@ stories.add("Hero", () => {
       </div>
       <div>
         <div style={{ width: "100%", height: "100%", padding: 50 }}>
-          <div style={{ width: 400, height: 500, backgroundColor: "#666" }} />
+          <div
+            style={{ width: 400, height: 500, backgroundColor: "#666" }}
+            ref={ref}
+          />
           <div style={{ width: 400, height: 500 }}></div>
           <div style={{ width: 400, height: 500 }} />
           <div style={{ width: 400, height: 500 }} />

@@ -7,7 +7,7 @@ import { IHero } from "../Types/Hero.types";
 export const HeroContext = React.createContext<IHero>({});
 
 export const Hero = (props: IHero) => {
-  const { children, transitionDuration, related, style } = props;
+  const { children, transitionDuration, related, style, wrapperRef } = props;
 
   const [nativeOpen, nativeSetOpen] = useState(false);
 
@@ -26,6 +26,7 @@ export const Hero = (props: IHero) => {
     controlled,
     transitionDuration,
     related,
+    wrapperRef,
   };
 
   let renderItem = null;

@@ -11,6 +11,7 @@ const Item = (props: IItem) => {
     setOpen,
     transitionDuration = 0.5,
     related = false,
+    wrapperRef,
   } = useContext(HeroContext);
 
   const itemRef = useRef<HTMLDivElement>(null);
@@ -27,6 +28,11 @@ const Item = (props: IItem) => {
   }, []);
 
   useEffect(() => {
+    let wrapperEl =
+      itemRef.current?.parentElement?.parentElement?.parentElement;
+
+    if (wrapperRef) wrapperEl = wrapperRef.current;
+
     ResizeItem({
       itemRef,
       itemExpandedRef,
@@ -34,6 +40,7 @@ const Item = (props: IItem) => {
       related,
       open,
       transitionDuration,
+      wrapperEl,
       inititalOpen,
     });
     setInititalOpen(false);

@@ -10,6 +10,7 @@ export interface IHero {
   transitionDuration?: number;
   related?: boolean;
   style?: Object;
+  wrapperRef?: RefObject<HTMLElement>;
 }
 
 export interface IItem {
@@ -29,6 +30,7 @@ export interface IResizeItem {
   open: boolean;
   transitionDuration: number;
   inititalOpen: boolean;
+  wrapperEl: HTMLElement | null | undefined;
 }
 
 export interface IStyleContent {
