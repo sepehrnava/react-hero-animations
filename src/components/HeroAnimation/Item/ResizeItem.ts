@@ -6,6 +6,7 @@ const ResizeItem = (props: IResizeItem) => {
     itemExpandedRef,
     overlayRef,
     overlayItemExpandedRef,
+    contentWrapper,
     related,
     open,
     transitionDuration,
@@ -97,6 +98,8 @@ const ResizeItem = (props: IResizeItem) => {
         }
       }
     };
+    if (contentWrapper)
+      contentWrapper.style.height = `calc(100% - ${heightAfter}px)`;
 
     if (inititalOpen) {
       transition = "none";

@@ -28,6 +28,7 @@ export interface IResizeItem {
   itemExpandedRef: RefObject<HTMLDivElement>;
   overlayRef: RefObject<HTMLDivElement>;
   overlayItemExpandedRef: RefObject<HTMLDivElement>;
+  contentWrapper: HTMLElement | null | undefined;
   related: boolean;
   open: boolean;
   transitionDuration: number;

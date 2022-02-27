@@ -39,11 +39,17 @@ const Item = (props: IItem) => {
       hasWrapper = true;
     }
 
+    let contentWrapper;
+    if (typeof document !== undefined) {
+      contentWrapper = document.getElementById("react-hero-content-container");
+    }
+
     ResizeItem({
       itemRef,
       itemExpandedRef,
       overlayRef,
       overlayItemExpandedRef,
+      contentWrapper,
       related,
       open,
       transitionDuration,

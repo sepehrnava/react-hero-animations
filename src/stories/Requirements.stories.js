@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { storiesOf } from "@storybook/react";
 import { Hero, HeroItem, HeroContent } from "../components/HeroAnimation/Hero";
+import { FpsView } from "react-fps";
 
 const stories = storiesOf("App Test", module);
 
@@ -11,6 +12,7 @@ stories.add("Hero", () => {
   const ref = useRef(null);
   return (
     <>
+      {/* <FpsView /> */}
       <div style={{ marginBottom: 200 }}>bbb</div>
       <div
         style={{
@@ -24,10 +26,10 @@ stories.add("Hero", () => {
           transitionDuration={0.5}
           open={open}
           setOpen={() => setOpen(!open)}
-          // related
+          related
           style={{ marginTop: 200 }}
           // wrapperRef={ref}
-          // targetHeight="same"
+          targetHeight='same'
           // targetHeight="full"
           // targetHeight={100}
         >
@@ -40,7 +42,7 @@ stories.add("Hero", () => {
                 width: "100%",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                marginLeft: 100,
+                // marginLeft: 100,
                 // borderRadius: 10,
               }}
             >
@@ -60,7 +62,11 @@ stories.add("Hero", () => {
             </div>
             <HeroContent>
               <div
-                style={{ backgroundColor: "#ccc", width: "100%", height: 400 }}
+                style={{
+                  backgroundColor: "#ccc",
+                  width: "100%",
+                  height: "100%",
+                }}
               >
                 contentttt
                 <br />

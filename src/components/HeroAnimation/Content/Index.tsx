@@ -6,7 +6,11 @@ const Content = (props: IContent) => {
 
   const contentRef = useRef<HTMLDivElement>(null);
 
-  return <div ref={contentRef}>{children}</div>;
+  return (
+    <div id='react-hero-content-container' ref={contentRef}>
+      {children}
+    </div>
+  );
 };
 
 export default Content;
