@@ -36,8 +36,10 @@ const ResizeItem = (props: IResizeItem) => {
       overlayHeight = "100vh",
       overlayPosition = "fixed",
       itemPosition = "fixed",
-      transition = `all ${transitionDuration}s`;
-
+      borderRadiusBefore = itemRef.current.style.borderRadius,
+      borderRadiusAfter = wrapperEl?.style.borderRadius,
+      transition = `transform ${transitionDuration}s cubic-bezier(0.175, 0.885, 0.32, 1.2), width ${transitionDuration}s cubic-bezier(0.175, 0.885, 0.32, 1.2), height ${transitionDuration}s cubic-bezier(0.175, 0.885, 0.32, 1.2)`;
+    // cubic-bezier(0.175, 0.885, 0.32, 1.2)
     let offsetTop = itemRect.top - bodyRect.top,
       offsetLeft = itemRect.left - bodyRect.left;
 
@@ -76,7 +78,8 @@ const ResizeItem = (props: IResizeItem) => {
           itemExpandedRef.current.style.transform = "none";
           itemExpandedRef.current.style.pointerEvents = `auto`;
           itemExpandedRef.current.style.position = itemPosition;
-          itemExpandedRef.current.style.visibility = `hidden`;
+          itemExpandedRef.current.style.opacity = `0`;
+
           overlayRef.current.style.top = overlayTopAfter;
           overlayRef.current.style.left = itemLeftAfter;
           overlayRef.current.style.visibility = "visible";
@@ -91,8 +94,8 @@ const ResizeItem = (props: IResizeItem) => {
           itemExpandedRef.current.style.top = offsetTop + "px";
           itemExpandedRef.current.style.left = offsetLeft + "px";
           itemExpandedRef.current.style.transform = "none";
-          itemRef.current.style.visibility = `visible`;
-          itemExpandedRef.current.style.visibility = `hidden`;
+          itemRef.current.style.opacity = `1`;
+          itemExpandedRef.current.style.opacity = `0`;
           itemExpandedRef.current.style.pointerEvents = `auto`;
           itemExpandedRef.current.style.position = "absolute";
         }
@@ -110,12 +113,9 @@ const ResizeItem = (props: IResizeItem) => {
       itemExpandedRef.current.style.left = offsetLeft + "px";
       itemExpandedRef.current.style.width = widthBefore + "px";
       itemExpandedRef.current.style.height = heightBefore;
-
-      itemExpandedRef.current.style.visibility = `visible`;
+      itemExpandedRef.current.style.borderRadius = borderRadiusAfter || "";
+      overlayRef.current.style.borderRadius = borderRadiusAfter || "";
       itemExpandedRef.current.style.pointerEvents = `none`;
-      setTimeout(() => {
-        if (itemRef.current) itemRef.current.style.visibility = `hidden`;
-      }, 10);
       itemExpandedRef.current.style.transition = transition;
       itemExpandedRef.current.style.transform = `translate(${-itemLeft}px, ${-itemTop}px)`;
       itemExpandedRef.current.style.width = widthAfter;
@@ -129,12 +129,14 @@ const ResizeItem = (props: IResizeItem) => {
         }, transitionDuration * 1000);
       }
     } else {
-      itemExpandedRef.current.style.visibility = `visible`;
+      itemExpandedRef.current.style.opacity = `1`;
       itemExpandedRef.current.style.transition = transition;
       itemExpandedRef.current.style.transform = `translate(${itemLeft}px, ${itemTop}px)`;
       itemExpandedRef.current.style.width = widthBefore + "px";
       itemExpandedRef.current.style.height = heightBefore;
       itemExpandedRef.current.style.pointerEvents = `none`;
+      itemExpandedRef.current.style.borderRadius = borderRadiusBefore;
+
       setTimeout(() => {
         if (overlayRef.current) overlayRef.current.style.visibility = "hidden";
       }, 10);

@@ -19,6 +19,8 @@ stories.add("Hero", () => {
           width: 700,
           height: 700,
           border: "1px solid black",
+          borderRadius: 10,
+          padding: 10,
           // overflow: "hidden",
         }}
       >
@@ -26,7 +28,7 @@ stories.add("Hero", () => {
           transitionDuration={0.5}
           open={open}
           setOpen={() => setOpen(!open)}
-          related
+          // related
           style={{ marginTop: 200 }}
           // wrapperRef={ref}
           targetHeight='same'
@@ -65,7 +67,7 @@ stories.add("Hero", () => {
                 style={{
                   backgroundColor: "#ccc",
                   width: "100%",
-                  height: "100%",
+                  height: 1200,
                 }}
               >
                 contentttt

@@ -65,6 +65,18 @@ const Item = (props: IItem) => {
     setOpen && setOpen(!open);
   };
 
+  const scaleHero = () => {
+    if (itemExpandedRef.current) {
+      setTimeout(() => {
+        if (itemRef.current) itemRef.current.style.opacity = `0`;
+      }, 10);
+
+      itemExpandedRef.current.style.opacity = "1";
+      itemExpandedRef.current.style.transition = `transform ${transitionDuration}s`;
+      itemExpandedRef.current.style.transform = "scale(0.9)";
+    }
+  };
+
   let renderContent = null;
 
   if (children.length > 0) {
@@ -93,15 +105,24 @@ const Item = (props: IItem) => {
     <div style={styles.heroContainer}>
       <div
         ref={itemRef}
-        onClick={toggleOpen}
-        style={{ ...styles.heroItem, background }}
+        onMouseDown={scaleHero}
+        onMouseUp={toggleOpen}
+        style={{
+          ...styles.heroItem,
+          background,
+        }}
       >
         {renderExceptContent}
       </div>
       <div
         ref={itemExpandedRef}
-        onClick={toggleOpen}
-        style={{ ...styles.heroItemExpanded, background }}
+        onMouseDown={scaleHero}
+        onMouseUp={toggleOpen}
+        style={{
+          ...styles.heroItemExpanded,
+          background,
+          transition: `all 1s`,
+        }}
       >
         {renderExceptContent}
       </div>
@@ -109,7 +130,6 @@ const Item = (props: IItem) => {
         //@ts-ignore
         style={styles.overlay}
         ref={overlayRef}
-        className='react-hero-overlay'
       >
         <div
           onClick={toggleOpen}
@@ -136,7 +156,7 @@ const styles = {
   },
   heroItemExpanded: {
     position: "absolute" as "absolute",
-    visibility: "hidden" as "hidden",
+    opacity: "0",
     cursor: "pointer",
     display: "flex",
     overflow: "hidden",
