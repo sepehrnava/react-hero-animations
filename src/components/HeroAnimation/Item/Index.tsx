@@ -73,7 +73,7 @@ const Item = (props: IItem) => {
 
       itemExpandedRef.current.style.opacity = "1";
       itemExpandedRef.current.style.transition = `transform ${transitionDuration}s`;
-      itemExpandedRef.current.style.transform = "scale(0.9)";
+      itemExpandedRef.current.style.transform = "scale(0.8)";
     }
   };
 
@@ -150,7 +150,7 @@ const styles = {
     overflow: "auto",
   },
   heroItem: {
-    width: "max-content",
+    // width: "max-content",
     cursor: "pointer",
     display: "flex",
   },

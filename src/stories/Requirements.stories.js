@@ -13,23 +13,26 @@ stories.add("Hero", () => {
   return (
     <>
       {/* <FpsView /> */}
-      <div style={{ marginBottom: 200 }}>bbb</div>
       <div
         style={{
-          width: 700,
-          height: 700,
-          border: "1px solid black",
-          borderRadius: 10,
-          padding: 10,
-          // overflow: "hidden",
+          width: 291,
+          height: 623,
+          // backgroundImage: `url('${require("../assets/mobileFrame.svg")}'`,
+          // backgroundSize: "cover",
+          border: "10px solid #303030",
+          borderRadius: 30,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          overflow: "auto",
         }}
       >
         <Hero
           transitionDuration={0.5}
           open={open}
           setOpen={() => setOpen(!open)}
-          // related
-          style={{ marginTop: 200 }}
+          related
+          style={{ marginTop: 100, width: 200 }}
           // wrapperRef={ref}
           targetHeight='same'
           // targetHeight="full"
@@ -38,36 +41,26 @@ stories.add("Hero", () => {
           <HeroItem>
             <div
               style={{
-                backgroundImage:
-                  "url('https://media.springernature.com/full/springer-cms/rest/v1/img/18893370/v1/height/320')",
-                height: "100%",
+                backgroundImage: `url('${require("../assets/content.png")}'`,
                 width: "100%",
+                height: 180,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                // marginLeft: 100,
-                // borderRadius: 10,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "white",
+                fontSize: 30,
               }}
             >
-              <div>ccc</div>
-              <div
-                style={{
-                  width: 400,
-                  height: 200,
-                  marginTop: 200,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                hero
-              </div>
+              hero
             </div>
             <HeroContent>
               <div
                 style={{
                   backgroundColor: "#ccc",
                   width: "100%",
-                  height: 1200,
+                  height: 200,
                 }}
               >
                 contentttt
@@ -79,17 +72,26 @@ stories.add("Hero", () => {
           </HeroItem>
         </Hero>
       </div>
-      <div>
-        <div style={{ width: "100%", height: "100%", padding: 50 }}>
-          <div
-            style={{ width: 400, height: 200, backgroundColor: "#666" }}
-            ref={ref}
-          />
-          <div style={{ width: 400, height: 500 }}></div>
-          <div style={{ width: 400, height: 500 }} />
-          <div style={{ width: 400, height: 500 }} />
-          <div style={{ width: 400, height: 500 }} />
-        </div>
+
+      <div
+        style={{
+          marginTop: 200,
+          border: "10px solid black",
+          width: 400,
+          height: 400,
+          position: "relative",
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "aqua",
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            top: 0,
+            left: 0,
+          }}
+        />
       </div>
     </>
   );

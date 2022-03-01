@@ -20,47 +20,55 @@ const ResizeItem = (props: IResizeItem) => {
     const itemRect = itemRef.current.getBoundingClientRect();
     const bodyRect = document?.body.getBoundingClientRect();
     const wrapperRect = wrapperEl?.getBoundingClientRect();
+    const clientWidth = wrapperEl?.clientWidth;
+    const clientHeight = wrapperEl?.clientHeight;
+    const widthDiff = (wrapperRect.width - clientWidth) / 2;
+    const heightDiff = (wrapperRect.height - clientHeight) / 2;
+    console.log(heightDiff);
+    console.log("wrapperRect.width: ", wrapperRect.width);
+    console.log("clientWidth: ", clientWidth);
+    console.log("widthDiff: ", widthDiff);
 
     const { width, height } = itemRect;
 
     let itemLeft = itemRect.left,
       itemTop = itemRect.top,
-      itemTopAfter = "0px",
-      itemLeftAfter = "0px",
+      itemTopAfter = heightDiff,
+      itemLeftAfter = widthDiff,
       widthBefore = width,
       widthAfter = "100vw",
       heightBefore = height + "px",
       heightAfter = height,
       overlayWidth = "100vw",
-      overlayTopAfter = "0px",
+      overlayTopAfter = heightDiff,
       overlayHeight = "100vh",
       overlayPosition = "fixed",
       itemPosition = "fixed",
       borderRadiusBefore = itemRef.current.style.borderRadius,
       borderRadiusAfter = wrapperEl?.style.borderRadius,
-      transition = `transform ${transitionDuration}s cubic-bezier(0.175, 0.885, 0.32, 1.2), width ${transitionDuration}s cubic-bezier(0.175, 0.885, 0.32, 1.2), height ${transitionDuration}s cubic-bezier(0.175, 0.885, 0.32, 1.2)`;
-    // cubic-bezier(0.175, 0.885, 0.32, 1.2)
-    let offsetTop = itemRect.top - bodyRect.top,
-      offsetLeft = itemRect.left - bodyRect.left;
+      transition = `all ${transitionDuration}s, opacity 0s`;
+    //
+    let offsetTop = itemRect.top - bodyRect.top + heightDiff,
+      offsetLeft = itemRect.left - bodyRect.left + widthDiff;
 
     if ((related || hasWrapper) && wrapperRect) {
       itemTop -= wrapperRect.top;
       itemLeft -= wrapperRect.left;
-      itemTopAfter = wrapperRect.top - bodyRect.top + "px";
-      itemLeftAfter = wrapperRect.left + "px";
-      overlayTopAfter = wrapperRect.top - bodyRect.top + "px";
-      widthAfter = wrapperRect.width + "px";
+      itemTopAfter = wrapperRect.top - bodyRect.top + heightDiff;
+      itemLeftAfter = wrapperRect.left + widthDiff;
+      overlayTopAfter = wrapperRect.top - bodyRect.top + heightDiff;
+      widthAfter = wrapperRect.width - widthDiff * 2 + "px";
       overlayPosition = "absolute";
-      overlayWidth = wrapperRect.width + "px";
-      overlayHeight = wrapperRect.height + "px";
+      overlayWidth = clientWidth + "px";
+      overlayHeight = clientHeight + "px";
       itemPosition = "absolute";
       if (hasWrapper) {
-        heightAfter = wrapperRect.height;
+        heightAfter = clientHeight;
       }
     }
     if (targetHeight && targetHeight !== "same") {
       if (targetHeight === "full") {
-        if (wrapperRect) heightAfter = wrapperRect.height;
+        if (wrapperRect) heightAfter = clientHeight;
       } else {
         heightAfter = targetHeight;
       }
@@ -68,20 +76,20 @@ const ResizeItem = (props: IResizeItem) => {
     if (overlayItemExpandedRef.current) {
       overlayItemExpandedRef.current.style.height = heightAfter + "px";
     }
-
+    console.log("itemTopAfter: ", itemTopAfter);
     const transitionTarget = () => {
       if (open) {
         if (itemExpandedRef.current && overlayRef.current) {
           itemExpandedRef.current.style.transition = "none";
-          itemExpandedRef.current.style.top = itemTopAfter;
-          itemExpandedRef.current.style.left = itemLeftAfter;
+          itemExpandedRef.current.style.top = itemTopAfter + "px";
+          itemExpandedRef.current.style.left = itemLeftAfter + "px";
           itemExpandedRef.current.style.transform = "none";
           itemExpandedRef.current.style.pointerEvents = `auto`;
           itemExpandedRef.current.style.position = itemPosition;
           itemExpandedRef.current.style.opacity = `0`;
 
-          overlayRef.current.style.top = overlayTopAfter;
-          overlayRef.current.style.left = itemLeftAfter;
+          overlayRef.current.style.top = overlayTopAfter + "px";
+          overlayRef.current.style.left = itemLeftAfter + "px";
           overlayRef.current.style.visibility = "visible";
           overlayRef.current.style.width = overlayWidth;
           overlayRef.current.style.height = overlayHeight;
@@ -91,8 +99,8 @@ const ResizeItem = (props: IResizeItem) => {
       } else {
         if (itemExpandedRef.current && itemRef.current) {
           itemExpandedRef.current.style.transition = "none";
-          itemExpandedRef.current.style.top = offsetTop + "px";
-          itemExpandedRef.current.style.left = offsetLeft + "px";
+          itemExpandedRef.current.style.top = offsetTop - heightDiff + "px";
+          itemExpandedRef.current.style.left = offsetLeft - widthDiff + "px";
           itemExpandedRef.current.style.transform = "none";
           itemRef.current.style.opacity = `1`;
           itemExpandedRef.current.style.opacity = `0`;
@@ -109,15 +117,17 @@ const ResizeItem = (props: IResizeItem) => {
     }
 
     if (open) {
-      itemExpandedRef.current.style.top = offsetTop + "px";
-      itemExpandedRef.current.style.left = offsetLeft + "px";
+      itemExpandedRef.current.style.top = offsetTop - heightDiff + "px";
+      itemExpandedRef.current.style.left = offsetLeft - widthDiff + "px";
       itemExpandedRef.current.style.width = widthBefore + "px";
       itemExpandedRef.current.style.height = heightBefore;
-      itemExpandedRef.current.style.borderRadius = borderRadiusAfter || "";
-      overlayRef.current.style.borderRadius = borderRadiusAfter || "";
+      // itemExpandedRef.current.style.borderRadius = borderRadiusAfter || "";
+      // overlayRef.current.style.borderRadius = borderRadiusAfter || "";
       itemExpandedRef.current.style.pointerEvents = `none`;
       itemExpandedRef.current.style.transition = transition;
-      itemExpandedRef.current.style.transform = `translate(${-itemLeft}px, ${-itemTop}px)`;
+      itemExpandedRef.current.style.transform = `translate(${
+        -itemLeft + widthDiff
+      }px, ${-itemTop + heightDiff}px)`;
       itemExpandedRef.current.style.width = widthAfter;
       itemExpandedRef.current.style.height = heightAfter + "px";
 
@@ -131,11 +141,13 @@ const ResizeItem = (props: IResizeItem) => {
     } else {
       itemExpandedRef.current.style.opacity = `1`;
       itemExpandedRef.current.style.transition = transition;
-      itemExpandedRef.current.style.transform = `translate(${itemLeft}px, ${itemTop}px)`;
+      itemExpandedRef.current.style.transform = `translate(${
+        itemLeft - widthDiff
+      }px, ${itemTop - heightDiff}px)`;
       itemExpandedRef.current.style.width = widthBefore + "px";
       itemExpandedRef.current.style.height = heightBefore;
       itemExpandedRef.current.style.pointerEvents = `none`;
-      itemExpandedRef.current.style.borderRadius = borderRadiusBefore;
+      // itemExpandedRef.current.style.borderRadius = borderRadiusBefore;
 
       setTimeout(() => {
         if (overlayRef.current) overlayRef.current.style.visibility = "hidden";
